@@ -1,12 +1,12 @@
-import React from 'react';
+import { useState } from "react";
 
 interface Props {
   onContinue: (password: string) => void;
 }
 
-const CreatePasswordCard: React.FC<Props> = ({ onContinue }) => {
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
+export default function CreatePasswordCard({ onContinue }: Props) {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = () => {
     if (password === confirmPassword && password.length >= 6) {
@@ -18,7 +18,7 @@ const CreatePasswordCard: React.FC<Props> = ({ onContinue }) => {
 
   return (
     <div className="bg-[#1e1b2e] text-white rounded-xl shadow-lg p-8 w-full max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-2 text-center">Create Wallet</h1>
+      <h1 className="text-3xl font-bold mb-2 text-center">Create Password</h1>
       <p className="text-sm text-gray-300 mb-6 text-center">
         Set a password to secure your wallet.
       </p>
@@ -49,4 +49,4 @@ const CreatePasswordCard: React.FC<Props> = ({ onContinue }) => {
   );
 };
 
-export default CreatePasswordCard;
+

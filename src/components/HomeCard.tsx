@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function HomeCard() {
     return (
         <div className="flex items-center justify-center h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
@@ -8,12 +10,17 @@ export default function HomeCard() {
                     Create or import a wallet to get started.
                 </p>
                 <div className="flex justify-center space-x-4">
-                    <button className="bg-[#5b4ee4] hover:bg-[#6c5ce7] text-white font-semibold py-2 px-6 rounded-lg">
-                        Create Wallet
-                    </button>
-                    <button className="bg-[#4339b3] hover:bg-[#5146d1] text-white font-semibold py-2 px-6 rounded-lg">
-                        Import Wallet
-                    </button>
+                    <Link href="create-wallet">
+                         <button className="bg-[#5b4ee4] hover:bg-[#6c5ce7] text-white font-semibold py-2 px-6 rounded-lg">
+                            Create Wallet
+                        </button>
+                    </Link>
+                   <Link href='import-wallet'>
+                        <button className="bg-[#4339b3] hover:bg-[#5146d1] text-white font-semibold py-2 px-6 rounded-lg">
+                            Import Wallet
+                        </button>
+                   </Link>
+                    
                 </div>
             </div>
         </div>
