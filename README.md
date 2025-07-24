@@ -8,7 +8,6 @@ Ethos Wallet is a sleek, secure, and minimal Ethereum wallet built with **Next.j
 
 ![Project Flow](image.png)
 
-> 💡 Make sure to rename your diagram image as `project-flow.png` and place it inside the `public/` folder of your project.
 
 ---
 
