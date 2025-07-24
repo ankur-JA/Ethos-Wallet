@@ -9,6 +9,7 @@ export default function CreateWalletPage() {
     function handleContinue(password: string) {
         const hashedPassword = hashPassword(password);
         localStorage.setItem('wallet_password_hash', hashedPassword);
+        setInputMnemonic(true);
     }
     return (
         <>
