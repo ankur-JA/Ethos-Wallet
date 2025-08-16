@@ -9,6 +9,9 @@ export default function MnemonicCard({ mnemonic }: Props) {
     const words = mnemonic.split(" ");
 
     function handleRoute() {
+        try {
+            localStorage.setItem('wallet_mnemonic', mnemonic);
+        } catch {}
         router.push('/dashboard');
     }
 

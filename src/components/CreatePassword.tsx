@@ -11,6 +11,17 @@ export default function CreatePasswordCard({ onContinue }: Props) {
   const isValid = password.length >= 6 && password === confirmPassword;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [capsLockOn, setCapsLockOn] = useState(false);
+
+  const strength = (() => {
+    let score = 0;
+    if (password.length >= 6) score += 1;
+    if (/[A-Z]/.test(password)) score += 1;
+    if (/[a-z]/.test(password)) score += 1;
+    if (/[0-9]/.test(password)) score += 1;
+    if (/[^A-Za-z0-9]/.test(password)) score += 1;
+    return score; // 0..5
+  })();
 
   const handleSubmit = () => {
     if (password === confirmPassword && password.length >= 6) {
@@ -41,6 +52,7 @@ export default function CreatePasswordCard({ onContinue }: Props) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               aria-label="Password"
+              onKeyUp={(e) => setCapsLockOn((e as unknown as KeyboardEvent).getModifierState?.('CapsLock') ?? false)}
             />
             <button
               type="button"
@@ -51,6 +63,9 @@ export default function CreatePasswordCard({ onContinue }: Props) {
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
+          {capsLockOn && (
+            <div className="mt-1 text-xs text-amber-300">Caps Lock is on</div>
+          )}
         </div>
 
         <div>
@@ -81,6 +96,19 @@ export default function CreatePasswordCard({ onContinue }: Props) {
           </div>
           <div className={`mt-1 ${confirmPassword && password === confirmPassword ? 'text-emerald-300' : confirmPassword ? 'text-red-300' : 'text-gray-400'}`}>
             {confirmPassword ? (password === confirmPassword ? '✓ Passwords match' : '• Passwords do not match') : '• Confirm your password'}
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <div className="h-2 w-full overflow-hidden rounded bg-white/10 ring-1 ring-white/10">
+            <div
+              className={`h-full transition-all ${
+                strength <= 2 ? 'bg-red-400 w-1/4' : strength === 3 ? 'bg-amber-400 w-2/4' : strength === 4 ? 'bg-lime-400 w-3/4' : 'bg-emerald-400 w-full'
+              }`}
+            />
+          </div>
+          <div className="mt-1 text-xs text-gray-300">
+            {strength <= 2 ? 'Weak' : strength === 3 ? 'Fair' : strength === 4 ? 'Good' : 'Strong'}
           </div>
         </div>
       </div>

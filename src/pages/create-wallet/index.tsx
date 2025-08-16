@@ -21,12 +21,14 @@ export default function CreateWalletPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
             <NavBar/>
-            <div className="mx-auto max-w-6xl px-6 py-10 flex items-start justify-center">
-                {!showMnemonic ? (
-                    <CreatePasswordCard onContinue={handleContinue}/>
-                ): (
-                    <MnemonicCard mnemonic={mnemonic}/>
-                )}
+            <div className="mx-auto max-w-6xl px-6 py-10">
+                <div className="min-h-[calc(100vh-96px)] flex items-center justify-center">
+                    {!showMnemonic ? (
+                        <CreatePasswordCard onContinue={handleContinue}/>
+                    ): (
+                        <MnemonicCard mnemonic={mnemonic}/>
+                    )}
+                </div>
             </div>
         </div>
     )

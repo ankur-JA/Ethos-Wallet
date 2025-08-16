@@ -20,7 +20,9 @@ export default function InputMnemonicCard() {
 
     // Optional: join and store in localStorage, etc.
     const fullMnemonic = mnemonic.join(" ");
-    console.log("Mnemonic:", fullMnemonic);
+    try {
+      localStorage.setItem('wallet_mnemonic', fullMnemonic);
+    } catch {}
 
     router.push("/dashboard");
   }
