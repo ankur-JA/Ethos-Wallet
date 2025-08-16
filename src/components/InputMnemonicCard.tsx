@@ -26,33 +26,32 @@ export default function InputMnemonicCard() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-[#1e1b2e] p-9 rounded-xl shadow-lg">
-        <div className="grid grid-cols-3 gap-4">
-          {mnemonic.map((word, index) => (
-            <div
-              key={index}
-              className="bg-white text-gray-800 font-medium border border-gray-300 rounded-xl px-4 py-2 shadow text-center"
-            >
-              <span className="text-sm text-gray-500 mr-1">{index + 1}.</span>
-              <input
-                type="text"
-                placeholder="word"
-                value={word}
-                onChange={(e) => handleChange(index, e.target.value)}
-                className="w-full focus:outline-none"
-              />
-            </div>
-          ))}
-          <div className="col-span-3 mt-4 flex justify-center">
-            <button
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg transition"
-              onClick={handleRoute}
-            >
-              Let's Go
-            </button>
-          </div>
-        </div>
+    <div className="w-full max-w-3xl mx-auto rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 shadow-2xl">
+      <h2 className="text-xl font-semibold text-white text-center">Import Wallet</h2>
+      <p className="mt-1 text-sm text-gray-300 text-center">Enter your 12-word recovery phrase in order.</p>
+
+      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
+        {mnemonic.map((word, index) => (
+          <label key={index} className="flex items-center gap-2 rounded-lg bg-black/40 px-3 py-2 ring-1 ring-white/10">
+            <span className="text-xs text-gray-400 w-4 text-right">{index + 1}</span>
+            <input
+              type="text"
+              placeholder="word"
+              value={word}
+              onChange={(e) => handleChange(index, e.target.value)}
+              className="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none"
+            />
+          </label>
+        ))}
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <button
+          className="inline-flex items-center justify-center rounded-lg bg-[--color-accent] px-5 py-2.5 font-semibold text-white shadow hover:opacity-90 transition"
+          onClick={handleRoute}
+        >
+          Continue
+        </button>
       </div>
     </div>
   );

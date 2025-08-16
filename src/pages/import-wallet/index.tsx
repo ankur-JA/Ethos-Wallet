@@ -12,18 +12,15 @@ export default function CreateWalletPage() {
         setInputMnemonic(true);
     }
     return (
-        <>
-            <div>
-                <NavBar/>
-            </div>
-            <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
+            <NavBar/>
+            <div className="mx-auto max-w-6xl px-6 py-10 flex items-start justify-center">
                 {!inputMnemonic ? (
                     <CreatePasswordCard onContinue={handleContinue}/>
                 ): (
                     <InputMnemonicCard />
                 )}
-                
             </div>
-        </>
+        </div>
     )
 }
