@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
+import { ArrowLeft } from 'lucide-react';
 import { useState } from "react";
 
-export default function InputMnemonicCard() {
+interface Props {
+  onBack?: () => void;
+}
+
+export default function InputMnemonicCard({ onBack }: Props) {
   const [mnemonic, setMnemonic] = useState<string[]>(Array(12).fill("")); // 12 empty words
   const router = useRouter();
 
@@ -27,10 +32,37 @@ export default function InputMnemonicCard() {
     router.push("/dashboard");
   }
 
+  async function handlePaste() {
+    try {
+      const text = await navigator.clipboard.readText();
+      const words = text.trim().split(/\s+/);
+      if (words.length === 12) {
+        setMnemonic(words);
+      } else {
+        alert('Clipboard does not contain 12 words.');
+      }
+    } catch {
+      alert('Unable to read from clipboard.');
+    }
+  }
+
   return (
     <div className="w-full max-w-3xl mx-auto rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 shadow-2xl">
-      <h2 className="text-xl font-semibold text-white text-center">Import Wallet</h2>
-      <p className="mt-1 text-sm text-gray-300 text-center">Enter your 12-word recovery phrase in order.</p>
+      <div className="grid grid-cols-3 items-center">
+        <div className="justify-self-start">
+          <button onClick={() => (onBack ? onBack() : router.replace('/import-wallet'))} className="inline-flex items-center gap-2 rounded-md bg-white/10 px-3 py-1.5 text-sm font-medium text-white ring-1 ring-white/20 hover:bg-white/15">
+            <ArrowLeft className="h-4 w-4" />
+            Back
+          </button>
+        </div>
+        <div className="justify-self-center text-center">
+          <h2 className="text-xl font-semibold text-white">Step 2 — Enter your recovery phrase</h2>
+          <p className="mt-1 text-sm text-gray-300">Paste or type your 12 words in order. Keep your phrase private.</p>
+        </div>
+        <div className="justify-self-end">
+          <button onClick={handlePaste} className="rounded-md bg-white/10 px-3 py-1.5 text-sm font-medium text-white ring-1 ring-white/20 hover:bg-white/15">Paste from clipboard</button>
+        </div>
+      </div>
 
       <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
         {mnemonic.map((word, index) => (
@@ -49,10 +81,11 @@ export default function InputMnemonicCard() {
 
       <div className="mt-6 flex justify-center">
         <button
-          className="inline-flex items-center justify-center rounded-lg bg-[--color-accent] px-5 py-2.5 font-semibold text-white shadow hover:opacity-90 transition"
+          className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-2.5 font-semibold text-white shadow-[0_8px_30px_rgba(99,102,241,0.35)] ring-1 ring-white/20 transition hover:shadow-[0_12px_40px_rgba(99,102,241,0.55)] active:translate-y-px"
           onClick={handleRoute}
         >
-          Continue
+          <span>Continue</span>
+          <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
       </div>
     </div>

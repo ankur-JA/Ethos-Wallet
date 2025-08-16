@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Eye, EyeOff, Shield } from 'lucide-react';
+import { Eye, EyeOff, Shield, ArrowRight } from 'lucide-react';
 
 interface Props {
   onContinue: (password: string) => void;
@@ -116,9 +116,10 @@ export default function CreatePasswordCard({ onContinue }: Props) {
       <button
         onClick={handleSubmit}
         disabled={!isValid}
-        className="mt-6 w-full inline-flex items-center justify-center rounded-lg bg-[--color-accent] px-4 py-2.5 font-semibold text-white shadow disabled:cursor-not-allowed disabled:opacity-60 hover:opacity-90 transition"
+        className="group mt-6 w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-2.5 font-semibold text-white shadow-[0_8px_30px_rgba(99,102,241,0.35)] ring-1 ring-white/20 transition hover:shadow-[0_12px_40px_rgba(99,102,241,0.55)] active:translate-y-px disabled:opacity-60 disabled:shadow-none disabled:cursor-not-allowed"
       >
-        Continue
+        <span>Continue</span>
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
       </button>
     </div>
   );
