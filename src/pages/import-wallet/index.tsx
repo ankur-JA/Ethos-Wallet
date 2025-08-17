@@ -1,10 +1,11 @@
+import Head from 'next/head';
 import NavBar from "@/components/NavBar";
 import CreatePasswordCard from "@/components/CreatePassword";
 import hashPassword from "@/utils/hash";
 import { useState } from "react";
 import InputMnemonicCard from "@/components/InputMnemonicCard";
 
-export default function CreateWalletPage() {
+export default function ImportWalletPage() {
     const [inputMnemonic, setInputMnemonic] = useState(false);
     function handleContinue(password: string) {
         const hashedPassword = hashPassword(password);
@@ -12,7 +13,12 @@ export default function CreateWalletPage() {
         setInputMnemonic(true);
     }
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
+        <>
+            <Head>
+                <title>Import Wallet - Ethos Wallet</title>
+                <meta name="description" content="Import your existing Ethereum wallet using your 12-word seed phrase" />
+            </Head>
+            <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]">
             <NavBar/>
             <div className="mx-auto max-w-6xl px-6 py-10">
                 <div className="mx-auto mb-6 max-w-md text-center">
@@ -32,5 +38,6 @@ export default function CreateWalletPage() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

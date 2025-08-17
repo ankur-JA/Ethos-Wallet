@@ -75,7 +75,7 @@ export default function App({ Component, pageProps }: AppProps) {
           setUnlocked(true);
           
           // Redirect to home if on protected route
-          const publicRoutes = ['/', '/create-wallet', '/import-wallet'];
+          const publicRoutes = ['/', '/create-wallet', '/import-wallet', '/about'];
           if (!publicRoutes.includes(router.pathname)) {
             console.log('Redirecting to home from protected route');
             router.replace('/');
