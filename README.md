@@ -245,7 +245,7 @@ This wallet is for educational and development purposes. While security best pra
 
 ## 🔗 Links
 
-- **Live Demo**: [https://ethos-wallet.vercel.app](https://ethos-wallet.vercel.app)
+- **Live Demo**: [https://ethos-wallet.vercel.app](https://next-l31t.vercel.app/)
 - **GitHub**: [https://github.com/ankur-JA/Ethos-Wallet](https://github.com/ankur-JA/Ethos-Wallet)
 - **Issues**: [Report bugs or request features](https://github.com/ankur-JA/Ethos-Wallet/issues)
 
