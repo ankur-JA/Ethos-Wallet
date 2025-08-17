@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { encryptMnemonic } from '@/utils/wallet';
 
 interface Props {
   mnemonic: string;
@@ -12,7 +13,9 @@ export default function MnemonicCard({ mnemonic, onBack }: Props) {
 
     function handleRoute() {
         try {
-            localStorage.setItem('wallet_mnemonic', mnemonic);
+            const key = localStorage.getItem('wallet_password_hash') || '';
+            const enc = encryptMnemonic(mnemonic, key);
+            localStorage.setItem('wallet_mnemonic_enc', enc);
         } catch {}
         router.push('/dashboard');
     }
