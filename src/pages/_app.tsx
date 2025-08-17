@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CryptoJS from 'crypto-js';
+import Footer from '@/components/Footer';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [unlocked, setUnlocked] = useState(false); // Default to locked
@@ -107,28 +108,39 @@ export default function App({ Component, pageProps }: AppProps) {
   // Show loading spinner while checking wallet state
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex flex-col">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-white">Loading...</div>
+        </div>
+        <Footer />
       </div>
     );
   }
 
   if (!unlocked) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center px-6">
-        <div className="w-full max-w-sm rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 text-white">
-          <h1 className="text-xl font-semibold text-center">Wallet Locked</h1>
-          <p className="mt-1 text-sm text-gray-300 text-center">Enter your password to unlock.</p>
-          <UnlockForm onUnlock={() => {
-            setUnlocked(true);
-            router.replace('/dashboard');
-          }} />
+      <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex flex-col">
+        <div className="flex-1 flex items-center justify-center px-6">
+          <div className="w-full max-w-sm rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 text-white">
+            <h1 className="text-xl font-semibold text-center">Wallet Locked</h1>
+            <p className="mt-1 text-sm text-gray-300 text-center">Enter your password to unlock.</p>
+            <UnlockForm onUnlock={() => {
+              setUnlocked(true);
+              router.replace('/dashboard');
+            }} />
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
-  return <Component {...pageProps} />;
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Component {...pageProps} />
+      <Footer />
+    </div>
+  );
 }
 
 function UnlockForm({ onUnlock }: { onUnlock: () => void }) {
